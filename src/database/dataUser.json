@@ -1,0 +1,28 @@
+{
+    "usuarios": [
+        {
+            "id_usuario": "Operario001",
+            "rol": "Operario",
+            "nombre": "Juan Pérez",
+            "turno": "Turno Matutino"
+        },
+        {
+            "id_usuario": "Tecnico002",
+            "rol": "Técnico",
+            "nombre": "Luis Martínez",
+            "turno": "Turno Vespertino"
+        },
+        {
+            "id_usuario": "Gerente001",
+            "rol": "Gerente",
+            "nombre": "Ana Gómez",
+            "turno": "Turno Completo"
+        },
+        {
+            "id_usuario": "Jefe002",
+            "rol": "Jefe de Producción",
+            "nombre": "Roberto Hernández",
+            "turno": "Turno Nocturno"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "ticket": {
+        "id_ticket": "TICKET12345",
+        "fecha_hora_reporte": "2024-09-15T14:35:00",
+        "id_linea": "SER01",
+        "categoria_problema": "Mecánico",
+        "descripcion_problema": "Falla en el sensor de temperatura del motor.",
+        "nivel_escalabilidad": "Bajo",
+        "estado_ticket": "Abierto",
+        "operario_reporta": "Operario001",
+        "asignado_a": ["Tecnico002","Jefe002","Gerente001"],
+        "resolucion": {
+            "fecha_hora_resolucion": "2024-09-15T16:20:00",
+            "acciones_tomadas": "Reemplazo del sensor defectuoso y calibración del sistema de monitoreo.",
+            "tiempo_inactividad": "1 hora 45 minutos"
+        }
+    }
+}

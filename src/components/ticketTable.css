@@ -1,0 +1,47 @@
+.tableContainer {
+    margin: 20px;
+    border-radius: 10px;
+    padding-bottom: 5px;
+    color: white;
+}
+
+.dataTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dataTable th,
+.dataTable td {
+    padding: 8px;
+    text-align: center;
+    background-color: rgb(236, 236, 236);
+}
+
+.dataTable td{
+    color: black;
+}
+
+.red .tableContainer{
+    background-color: rgb(255, 71, 71);
+}
+
+.red .dataTable th{
+    background-color: rgb(255, 113, 113);
+}
+
+.yellow .tableContainer{
+    background-color: rgb(227, 185, 48);
+}
+
+.yellow .dataTable th {
+    background-color: rgb(227, 227, 76);
+    color: rgb(67, 67, 67);
+}
+
+.green .tableContainer{
+    background-color: rgb(51, 154, 48);
+}
+
+.green .dataTable th {
+    background-color: rgb(91, 186, 80);
+}
