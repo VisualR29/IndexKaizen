@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="tabla" element={<TicketList/>} />
+            <Route path="/category/:category" element={<TicketList/>} />
             <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
           </Route>
         </Routes>

@@ -1,7 +1,12 @@
+import { useParams } from "react-router-dom";
 import TicketTable from "../components/TicketTable";
 import './ticketList.css';
 
 const TicketList = () => {
+
+    let { category } = useParams();
+    
+    category = category.toLowerCase();
     
     return (
         <div>
