@@ -2,7 +2,7 @@ import './ticketTable.css';
 
 const TicketTable = ({ title, color, data }) => {
 
-    const columns = ["Ticket", "Area", "Linea", "Cliente", "Causa", "Comentario", "Fecha", "Editar", "Bloquear"];
+    const columns = ["Ticket", "Area", "Linea", "Cliente", "Problema", "Comentario", "Fecha", "Editar", "Bloquear"];
 
     return (
         <div className={color} >
@@ -18,17 +18,17 @@ const TicketTable = ({ title, color, data }) => {
                     </thead>
                     <tbody>
                         {data && data.length > 0 ? (
-                            data.map((row, rowIndex) => (
-                                <tr key={rowIndex}>
-                                    <td>{row.col1}</td>
-                                    <td>{row.col2}</td>
-                                    <td>{row.col3}</td>
-                                    <td>{row.col4}</td>
-                                    <td>{row.col5}</td>
-                                    <td>{row.col6}</td>
-                                    <td>{row.col7}</td>
-                                    <td>{row.col8}</td>
-                                    <td>{row.col9}</td>
+                            data.map((ticket, ticketIndex) => (
+                                <tr key={ticketIndex}>
+                                    <td>{ticket.id_ticket}</td>
+                                    <td>{ticket.area}</td>
+                                    <td>{ticket.linea}</td>
+                                    <td>{ticket.cliente}</td>
+                                    <td>{ticket.categoria_problema}</td>
+                                    <td>{ticket.descripcion_problema}</td>
+                                    <td>{ticket.fecha_hora_reporte}</td>
+                                    <td>{ticket.col8}</td>
+                                    <td>{ticket.col9}</td>
                                 </tr>
                             ))
                         ) : (

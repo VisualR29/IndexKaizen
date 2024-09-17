@@ -1,18 +1,94 @@
-{
-    "ticket": {
+[
+    {
         "id_ticket": "TICKET12345",
+        "categoria": "qa",
         "fecha_hora_reporte": "2024-09-15T14:35:00",
-        "id_linea": "SER01",
+        "area": "SMT",
+        "linea": "SER01",
+        "cliente": "SER",
         "categoria_problema": "Mecánico",
         "descripcion_problema": "Falla en el sensor de temperatura del motor.",
         "nivel_escalabilidad": "Bajo",
-        "estado_ticket": "Abierto",
+        "estado_ticket": "Espera",
         "operario_reporta": "Operario001",
-        "asignado_a": ["Tecnico002","Jefe002","Gerente001"],
+        "asignado_a": [
+            "Tecnico002",
+            "Jefe002",
+            "Gerente001"
+        ],
         "resolucion": {
             "fecha_hora_resolucion": "2024-09-15T16:20:00",
             "acciones_tomadas": "Reemplazo del sensor defectuoso y calibración del sistema de monitoreo.",
             "tiempo_inactividad": "1 hora 45 minutos"
         }
+    },
+    {
+        "id_ticket": "TICKET12344",
+        "categoria": "prod",
+        "fecha_hora_reporte": "2024-09-15T14:35:00",
+        "area": "SMT",
+        "linea": "SER02",
+        "cliente": "SER",
+        "categoria_problema": "Mecánico",
+        "descripcion_problema": "Falla en el sensor de temperatura del motor.",
+        "nivel_escalabilidad": "Bajo",
+        "estado_ticket": "Solicitud",
+        "operario_reporta": "Operario001",
+        "asignado_a": [
+            "Tecnico002",
+            "Jefe002",
+            "Gerente001"
+        ],
+        "resolucion": {
+            "fecha_hora_resolucion": "2024-09-15T16:20:00",
+            "acciones_tomadas": "Reemplazo del sensor defectuoso y calibración del sistema de monitoreo.",
+            "tiempo_inactividad": "1 hora 45 minutos"
+        }
+    },
+    {
+        "id_ticket": "TICKET12346",
+        "categoria": "qa",
+        "fecha_hora_reporte": "2024-09-15T10:30:00",
+        "area": "BE",
+        "linea": "SER02",
+        "cliente": "SER",
+        "categoria_problema": "Eléctrico",
+        "descripcion_problema": "Cortocircuito en el sistema de control.",
+        "nivel_escalabilidad": "Alto",
+        "estado_ticket": "Trabajando",
+        "operario_reporta": "Operario002",
+        "asignado_a": [
+            "Tecnico003",
+            "Jefe003",
+            "Gerente002"
+        ],
+        "resolucion": {
+            "fecha_hora_resolucion": null,
+            "acciones_tomadas": "",
+            "tiempo_inactividad": ""
+        }
+    },
+    {
+        "id_ticket": "TICKET12347",
+        "categoria": "metales",
+        "fecha_hora_reporte": "2024-09-16T09:00:00",
+        "area": "BB",
+        "linea": "SER03",
+        "cliente": "SER",
+        "categoria_problema": "Software",
+        "descripcion_problema": "Error en el sistema de control de producción.",
+        "nivel_escalabilidad": "Medio",
+        "estado_ticket": "Espera",
+        "operario_reporta": "Operario003",
+        "asignado_a": [
+            "Tecnico004",
+            "Jefe004",
+            "Gerente003"
+        ],
+        "resolucion": {
+            "fecha_hora_resolucion": "2024-09-16T11:00:00",
+            "acciones_tomadas": "Reinicio del sistema y parche del software.",
+            "tiempo_inactividad": "2 horas"
+        }
     }
-}
+]
