@@ -6,8 +6,9 @@ import './navbar.css';
 
 const NavBar = () => {
     const [isActive, setIsActive] = useState(false);
-    const location = useLocation(); // Obtén la ubicación actual
-    const categories = ["QA", "Metales", "Ind", "Prod", "IT", "Proc", "Prueb", "Compras", "D-trash", "Mat", "Plann", "Mtto", "RH", "Mfg"];
+    const location = useLocation(); 
+    const categoriesTitle = ["QA", "Metales", "Ind", "Prod", "IT", "Proc", "Prueb", "Compras", "D-trash", "Mat", "Plann", "Mtto", "RH", "Mfg"];
+    const categories = categoriesTitle.map(category => category.toLowerCase());
 
     const toggleBurgerMenu = () => {
         setIsActive(!isActive);
@@ -34,14 +35,14 @@ const NavBar = () => {
 
             <div id="navbarBasicExample" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
                 <div className="navbar-start">
-                    {categories.map((category) => (
+                    {categories.map((category, index) => (
                         <Link
                             to={`/category/${category}`}
                             className={`navbar-item ${location.pathname === `/category/${category}` ? 'is-active' : ''}`}
                             key={category}
                             onClick={closeBurgerMenu}
                         >
-                            {category}
+                            {categoriesTitle[index]}
                         </Link>
                     ))}
                 </div>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import TicketTable from "../components/TicketTable";
 import './ticketList.css';
 import json from '../database/dataTicket.json';
@@ -34,7 +34,7 @@ const TicketList = () => {
         <div>
             <div className="banner">
                 <h1>Tickets</h1>
-                <button>+</button>
+                <Link to={`/category/${category}/agregar`}><button>+</button></Link>
             </div>
             <TicketTable title="Solicitud" color="red" data={ticketsA} />
             <TicketTable title="En Espera" color="yellow" data={ticketsB} />
