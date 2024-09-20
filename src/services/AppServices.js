@@ -1,18 +1,14 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; 
 import { baseUrl } from "../database/realtimeDataBase";
 
 export const appApi = createApi({
     reducerPath: "appApi",
-    baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+    baseQuery: fetchBaseQuery({ baseUrl: baseUrl }), 
     endpoints: (builder) => ({
-        
         getTickets: builder.query({
             query: () => `tickets.json`,
-            transformResponse: (res) => {
-                if (!res) return [];
-                return (res)
-            },
-            providesTags: ["tickets"],
+            transformResponse: (res) => res || [], 
+            providesTags: ["Tickets"],
         }),
         postTicket: builder.mutation({
             query: ({ id, ...ticket }) => ({
@@ -20,13 +16,9 @@ export const appApi = createApi({
                 method: "PUT",
                 body: ticket,
             }),
-            invalidatesTags: ["tickets"],
+            invalidatesTags: ["Tickets"],
         }),
-    })
-})
+    }),
+});
 
-export const {
-    useGetTicketsQuery,
-
-    usePostTicketMutation
-} = appApi;
+export const { useGetTicketsQuery, usePostTicketMutation } = appApi;

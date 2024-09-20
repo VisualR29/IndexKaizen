@@ -1,31 +1,62 @@
-import './home.css';
-import avatar from '../assets/avatar.avif'
 import React from 'react';
-import 'bulma/css/bulma.css';
+import './home.css';
+import { usePostTicketMutation } from '../services/AppServices';
 
 const HomePage = () => {
+
+    const [triggerPostTicket] = usePostTicketMutation();
+
+    const ticketEjemplo = {
+        id_ticket: "TICKET12346",
+        categoria: "ind",
+        fecha_hora_reporte: "2024-09-15T14:35:00",
+        area: "SMT",
+        linea: "SER01",
+        cliente: "SER",
+        categoria_problema: "Mecánico",
+        descripcion_problema: "Falla en el sensor de temperatura del motor.",
+        nivel_escalabilidad: "Bajo",
+        estado_ticket: "Espera",
+        operario_reporta: "Operario001",
+        asignado_a: [
+            "Tecnico002",
+            "Jefe002",
+            "Gerente001"
+        ],
+        resolucion: {
+            fecha_hora_resolucion: "2024-09-15T16:20:00",
+            acciones_tomadas: "Reemplazo del sensor defectuoso y calibración del sistema de monitoreo.",
+            tiempo_inactividad: "1 hora 45 minutos"
+        }
+    }
+
+    const handleClick = async (values) => {
+        alert('Botón presionado');
+        const idTicket = "TICKETID2"
+        try {
+            await triggerPostTicket({
+                idTicket,
+                ticket: { values }
+            });
+            alert('Gasto agregado');
+        } catch (error) {
+            alert("Error");
+            console.error(error);
+        }
+        alert("Fin de programa")
+    };
+
     return (
-        <section className="hero is-fullheight home">
-            <div className="hero-body">
-                <div className="container has-text-centered">
-                    <div className="columns is-centered">
-                        <div className="column is-half">
-                            <figure className="image is-128x128	is-inline-block">
-                                <img src={avatar} alt="Logo" />
-                            </figure>
-                            <h1 className="title is-2">Bienvenido al Sistema Andon</h1>
-                            <p className="subtitle is-4">
-                                Monitoreo en tiempo real y gestión de incidencias en la línea de producción.
-                            </p>
-                            {/* <Link to="/dashboard" className="button is-primary is-large mt-4">
-                                Ir al Panel de Control
-                            </Link> */}
-                        </div>
-                    </div>
-                </div>
+        <div className="portada-container">
+            <div className="overlay"></div>
+            <div className="content">
+                <h1>Gestor de tickets</h1>
+                <p>Gestiona los tickets de problemas, optimiza tu línea de producción y conoce tu tiempo muerto.</p>
+                {/* Se corrige el onClick para pasar una función anónima */}
+                <button onClick={() => handleClick(ticketEjemplo)}>PRESIONAME</button>
             </div>
-        </section>
+        </div>
     );
-};
+}
 
 export default HomePage;

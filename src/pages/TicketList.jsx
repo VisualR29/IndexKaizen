@@ -1,34 +1,34 @@
 import { Link, useParams } from "react-router-dom";
 import TicketTable from "../components/TicketTable";
 import './ticketList.css';
-import json from '../database/dataTicket.json';
+import { useGetTicketsQuery } from "../services/AppServices";
 
 const TicketList = () => {
 
+    const { data: tickets, isLoading, error } = useGetTicketsQuery();
+
+    // if (isLoading) return <Loading message={"Cargando..."} act={true} />;
+
+    // if (error) return <Loading message={`Error: ${error.message}`} act={false} />;
+
     let { category } = useParams();
     category = category.toLowerCase();
-    
-    const data = json;//BORRAR DATOS DEL JSON
 
-    const filteredTickets = data.filter((data) => {
-        const categoryMatch = data.categoria === category;
-        return categoryMatch;
-    })
+    const filteredTickets = (tickets && tickets.length > 0) ? tickets.filter((data) => {
+        return data.categoria === category;
+    }) : [];
 
-    const ticketsA = filteredTickets.filter((data) => {
-        const tickets = data.estado_ticket === "Solicitud";
-        return tickets;
-    })
+    const ticketsA = filteredTickets.length > 0 ? filteredTickets.filter((data) => {
+        return data.estado_ticket === "Solicitud";
+    }) : [];
 
-    const ticketsB = filteredTickets.filter((data) => {
-        const tickets = data.estado_ticket === "Espera";
-        return tickets;
-    })
+    const ticketsB = filteredTickets.length > 0 ? filteredTickets.filter((data) => {
+        return data.estado_ticket === "Espera";
+    }) : [];
 
-    const ticketsC = filteredTickets.filter((data) => {
-        const tickets = data.estado_ticket === "Trabajando";
-        return tickets;
-    })
+    const ticketsC = filteredTickets.length > 0 ? filteredTickets.filter((data) => {
+        return data.estado_ticket === "Trabajando";
+    }) : [];
 
     return (
         <div>

@@ -2,7 +2,7 @@ import './ticketTable.css';
 
 const TicketTable = ({ title, color, data }) => {
 
-    const columns = ["Ticket", "Area", "Linea", "Cliente", "Problema", "Comentario", "Fecha", "Editar", "Bloquear"];
+    const columns = ["Area", "Linea", "Cliente", "Problema", "Comentario", "Editar", "Progresar"];
 
     return (
         <div className={color} >
@@ -20,20 +20,18 @@ const TicketTable = ({ title, color, data }) => {
                         {data && data.length > 0 ? (
                             data.map((ticket, ticketIndex) => (
                                 <tr key={ticketIndex}>
-                                    <td>{ticket.id_ticket}</td>
                                     <td>{ticket.area}</td>
                                     <td>{ticket.linea}</td>
                                     <td>{ticket.cliente}</td>
                                     <td>{ticket.categoria_problema}</td>
                                     <td>{ticket.descripcion_problema}</td>
-                                    <td>{ticket.fecha_hora_reporte}</td>
                                     <td>{ticket.col8}</td>
                                     <td>{ticket.col9}</td>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="9">No hay datos disponibles</td>
+                                <td colSpan="7">No hay datos disponibles</td>
                             </tr>
                         )}
                     </tbody>

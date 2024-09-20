@@ -5,13 +5,13 @@ import Layout from "./nav/Layout";
 import TicketList from "./pages/TicketList";
 import TicketForm from "./pages/TicketForm";
 import { Provider } from "react-redux";
-import store from "./services/store";
+import store from "./services/index";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Provider store={store}>
+      <Provider store={store}>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
@@ -20,8 +20,8 @@ function App() {
               <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
             </Route>
           </Routes>
-        </Provider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }
