@@ -4,7 +4,7 @@ import { usePostTicketMutation } from '../services/AppServices';
 
 const TicketForm = () => {
     
-    const [postTicket] = usePostTicketMutation();
+    const [triggerPostTicket] = usePostTicketMutation();
 
     const [formData, setFormData] = useState({
         area: '',
@@ -19,7 +19,7 @@ const TicketForm = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
 
         const newTicket = {
@@ -38,8 +38,12 @@ const TicketForm = () => {
             resolucion: {}
         };
 
-        postTicket(newTicket);
-        console.log('Ticket creado:', newTicket);
+        try {
+            await triggerPostTicket({ id: newTicket.id_ticket, newTicket });
+            alert('Gasto agregado');
+        } catch (error) {
+            alert("Error");
+        }
     };
 
     return (

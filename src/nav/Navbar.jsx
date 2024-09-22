@@ -7,7 +7,7 @@ import './navbar.css';
 const NavBar = () => {
     const [isActive, setIsActive] = useState(false);
     const location = useLocation(); 
-    const categoriesTitle = ["QA", "Metales", "Ind", "Prod", "IT", "Proc", "Prueb", "Compras", "D-trash", "Mat", "Plann", "Mtto", "RH", "Mfg"];
+    const categoriesTitle = ["QA", "Metales", "Ind", "Prod", "IT", "Proc", "Prueb", "Compras", "Almacen", "Plann", "Mtto", "RH", "Mfg"];
     const categories = categoriesTitle.map(category => category.toLowerCase());
 
     const toggleBurgerMenu = () => {

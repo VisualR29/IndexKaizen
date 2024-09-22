@@ -32,11 +32,11 @@ const HomePage = () => {
 
     const handleClick = async (values) => {
         alert('Botón presionado');
-        const idTicket = "TICKETID2"
+        const idTicket = 10
         try {
             await triggerPostTicket({
-                idTicket,
-                ticket: { values }
+                id: idTicket,
+                values
             });
             alert('Gasto agregado');
         } catch (error) {

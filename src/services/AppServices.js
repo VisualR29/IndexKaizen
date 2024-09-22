@@ -4,20 +4,26 @@ import { baseUrl } from "../database/realtimeDataBase";
 export const appApi = createApi({
     reducerPath: "appApi",
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }), 
+    tagTypes: ["tickets"],
     endpoints: (builder) => ({
         getTickets: builder.query({
             query: () => `tickets.json`,
-            transformResponse: (res) => res || [], 
-            providesTags: ["Tickets"],
+            transformResponse: (res) => {
+                if (!res) return [];
+                return Object.keys(res).map(id => ({
+                    id,
+                    ...res[id]
+                }));
+            } , 
+            providesTags: ["tickets"],
         }),
         postTicket: builder.mutation({
-            query: ({ id, ...ticket }) => ({
+            query: ({ id, newTicket }) => ({
                 url: `tickets/${id}.json`,
                 method: "PUT",
-                body: ticket,
-            }),
-            invalidatesTags: ["Tickets"],
-        }),
+                body: newTicket,
+            })
+        })
     }),
 });
 
