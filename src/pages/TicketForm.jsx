@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ticketForm.css';
 import { useGetIdQuery, usePostIdMutation, usePostTicketMutation } from '../services/AppServices';
 import { useParams } from 'react-router-dom';
@@ -9,8 +9,10 @@ const TicketForm = () => {
 
     const [triggerIdTicket] = usePostIdMutation();
 
-    const { data:id_ticket } = useGetIdQuery();
-    
+    const { data: initialIdTicket } = useGetIdQuery();
+
+    const [idTicket, setIdTicket] = useState(initialIdTicket); 
+
     const [formData, setFormData] = useState({
         area: '',
         linea: '',
@@ -20,49 +22,59 @@ const TicketForm = () => {
     });
 
     let { category } = useParams();
-    
     category = category.toLowerCase();
+    console.log("category: " + category);
 
-    console.log("category: " + category)
-    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    
-    const handleSubmit = async(e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        
+
         const newTicket = {
-            id_ticket: `TICKET${Math.floor(id_ticket)}`, 
-            categoria: category, 
+            id_ticket: `TICKET${idTicket}`, 
+            categoria: category,
             fecha_hora_reporte: new Date().toISOString(),
             area: formData.area,
             linea: formData.linea,
             cliente: formData.cliente,
             categoria_problema: formData.categoria_problema,
             descripcion_problema: formData.descripcion_problema,
-            nivel_escalabilidad: 'Bajo', 
-            estado_ticket: 'Solicitud', 
-            operario_reporta: 'Operario001', 
-            asignado_a: ['Tecnico002', 'Jefe002', 'Gerente001'], 
+            nivel_escalabilidad: 'Bajo',
+            estado_ticket: 'Solicitud',
+            operario_reporta: 'Operario001',
+            asignado_a: ['Tecnico002', 'Jefe002', 'Gerente001'],
             resolucion: {
                 fecha_hora_resolucion: null,
                 acciones_tomadas: "",
                 tiempo_inactividad: null
             }
         };
-        
+
         try {
             await triggerPostTicket({ id: newTicket.id_ticket, newTicket });
-            const idNumber = id_ticket + 1;
-            await triggerIdTicket({ idNumber });
-            alert('Gasto agregado');
+
+            const nextId = idTicket + 1;
+            setIdTicket(nextId);
+
+            await triggerIdTicket({ idNumber: nextId });
+
+            alert('Ticket agregado con éxito');
+
         } catch (error) {
-            alert("Error");
+            alert("Error al agregar el ticket");
+            console.error(error);
         }
     };
+
+    useEffect(() => {
+        if (initialIdTicket) {
+            setIdTicket(initialIdTicket);
+        }
+    }, [initialIdTicket]);
+
     
     return (
         <form className="ticket-form" onSubmit={handleSubmit}>
