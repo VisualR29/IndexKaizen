@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import './ticketForm.css';
-import { usePostTicketMutation } from '../services/AppServices';
+import { useGetIdQuery, usePostIdMutation, usePostTicketMutation } from '../services/AppServices';
+import { useParams } from 'react-router-dom';
 
 const TicketForm = () => {
     
     const [triggerPostTicket] = usePostTicketMutation();
 
+    const [triggerIdTicket] = usePostIdMutation();
+
+    const { data:id_ticket } = useGetIdQuery();
+    
     const [formData, setFormData] = useState({
         area: '',
         linea: '',
@@ -14,17 +19,24 @@ const TicketForm = () => {
         descripcion_problema: ''
     });
 
+    let { category } = useParams();
+    
+    category = category.toLowerCase();
+
+    console.log("category: " + category)
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+    
     const handleSubmit = async(e) => {
         e.preventDefault();
-
+        
+        
         const newTicket = {
-            id_ticket: `TICKET${Math.floor(Math.random() * 100000)}`, 
-            categoria: 'qa', 
+            id_ticket: `TICKET${Math.floor(id_ticket)}`, 
+            categoria: category, 
             fecha_hora_reporte: new Date().toISOString(),
             area: formData.area,
             linea: formData.linea,
@@ -32,20 +44,26 @@ const TicketForm = () => {
             categoria_problema: formData.categoria_problema,
             descripcion_problema: formData.descripcion_problema,
             nivel_escalabilidad: 'Bajo', 
-            estado_ticket: 'Espera', 
+            estado_ticket: 'Solicitud', 
             operario_reporta: 'Operario001', 
             asignado_a: ['Tecnico002', 'Jefe002', 'Gerente001'], 
-            resolucion: {}
+            resolucion: {
+                fecha_hora_resolucion: null,
+                acciones_tomadas: "",
+                tiempo_inactividad: null
+            }
         };
-
+        
         try {
             await triggerPostTicket({ id: newTicket.id_ticket, newTicket });
+            const idNumber = id_ticket + 1;
+            await triggerIdTicket({ idNumber });
             alert('Gasto agregado');
         } catch (error) {
             alert("Error");
         }
     };
-
+    
     return (
         <form className="ticket-form" onSubmit={handleSubmit}>
             <h2>Crear Nuevo Ticket</h2>
@@ -55,8 +73,8 @@ const TicketForm = () => {
                 <select name="area" value={formData.area} onChange={handleChange} required>
                     <option value="">Selecciona un área</option>
                     <option value="SMT">SMT</option>
-                    <option value="QA">QA</option>
-                    <option value="Producción">Producción</option>
+                    <option value="BE">Backend</option>
+                    <option value="BB">Box Build</option>
                 </select>
             </div>
 
@@ -73,8 +91,7 @@ const TicketForm = () => {
                 <label htmlFor="cliente">Cliente</label>
                 <select name="cliente" value={formData.cliente} onChange={handleChange} required>
                     <option value="">Selecciona un cliente</option>
-                    <option value="SER">SER</option>
-                    <option value="TEX">TEX</option>
+                    <option value="SER">Servertech</option>
                 </select>
             </div>
 
