@@ -2,17 +2,19 @@ import { Link, useParams } from "react-router-dom";
 import TicketTable from "../components/TicketTable";
 import './ticketList.css';
 import { useGetTicketsQuery } from "../services/AppServices";
+import Loading from "../components/Loading";
 
 const TicketList = () => {
 
     const { data: tickets, isLoading, error } = useGetTicketsQuery();
 
-    // if (isLoading) return <Loading message={"Cargando..."} act={true} />;
-
-    // if (error) return <Loading message={`Error: ${error.message}`} act={false} />;
-
     let { category } = useParams();
     category = category.toLowerCase();
+    
+    if (isLoading) return <Loading message={"Cargando..."} act={true} />;
+
+    if (error) return <Loading message={`Error: ${error.message}`} act={false} />;
+
 
     const filteredTickets = (tickets && tickets.length > 0) ? tickets.filter((data) => {
         return data.categoria === category;
